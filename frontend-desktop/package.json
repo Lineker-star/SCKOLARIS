@@ -1,0 +1,35 @@
+{
+  "name": "e-biblio",
+  "version": "1.0.0",
+  "description": "SCKOLARIS — bibliothèque numérique de l'Institut Universitaire ZTF",
+  "author": "IU-ZTF",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^44.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "cm.iuztf.ebiblio.desktop",
+    "productName": "SCKOLARIS",
+    "files": [
+      "main.js",
+      "preload.js"
+    ],
+    "icon": "build/icon.png",
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "license": "build/license.txt"
+    }
+  }
+}

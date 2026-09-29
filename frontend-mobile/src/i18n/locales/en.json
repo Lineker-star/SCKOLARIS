@@ -1,0 +1,561 @@
+{
+  "common": {
+    "appName": "SCKOLARIS - Universite ZTF",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "download": "Download",
+    "read": "Read",
+    "add": "Add",
+    "create": "Create",
+    "send": "Send",
+    "yes": "Yes",
+    "no": "No",
+    "error": "Something went wrong.",
+    "retry": "Retry",
+    "chooseLanguage": "Choose language",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "register": "Sign up",
+    "login": "Log in",
+    "backToDashboard": "Back to dashboard",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "dashboard": "Dashboard",
+    "catalog": "Catalog",
+    "myLibrary": "My library",
+    "depositCourse": "Deposit a course",
+    "myDeposits": "My deposits",
+    "domains": "Domains",
+    "statistics": "Statistics",
+    "users": "Users",
+    "pendingAccounts": "Pending accounts",
+    "deletionRequests": "Deletion requests",
+    "downloadApp": "Download the app",
+    "guide": "User guide",
+    "teacherSpace": "Teacher space",
+    "adminConsole": "Admin console",
+    "studentSpace": "Student space",
+    "viewSite": "View the site",
+    "profile": "Profile",
+    "logout": "Log out"
+  },
+  "appShell": {
+    "updateAvailable": "New version available ({{version}})",
+    "update": "Update"
+  },
+  "textField": {
+    "hidePassword": "Hide password",
+    "showPassword": "Show password"
+  },
+  "authLayout": {
+    "copyright": "© 2024 Universite ZTF University Library. All rights reserved."
+  },
+  "status": {
+    "pending": "Pending",
+    "validated": "Validated",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "deactivated": "Deactivated",
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "home": {
+    "hero": {
+      "title": "Knowledge, one click away.",
+      "text": "Access thousands of books, theses, and scientific articles from Universite ZTF University. A digital library built for academic excellence.",
+      "cta": "Explore the catalog"
+    },
+    "toolsTitle": "Your tools for success",
+    "tools": {
+      "search": {
+        "title": "Search",
+        "text": "Quickly find your resources with our search engine by title, author, and subject."
+      },
+      "read": {
+        "title": "Read",
+        "text": "Browse high-resolution digitized books directly from your browser."
+      },
+      "download": {
+        "title": "Download",
+        "text": "Download your documents to read them offline, anytime."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "intro": "Our team is available for any question regarding the library, your digital resources, or your account.",
+    "addressTitle": "Address",
+    "addressLine1": "Institut Universitaire ZTF ",
+    "addressLine2": "Main Campus",
+    "location": "Bertoua, Cameroon",
+    "assistanceTitle": "Support",
+    "hoursTitle": "Opening hours",
+    "hours": {
+      "weekdays": "Monday - Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "closed": "Closed"
+    },
+    "formTitle": "Send us a message",
+    "formIntro": "A question, a suggestion, trouble accessing a document? Write to us directly through this form, our team replies quickly.",
+    "sentTitle": "Message sent!",
+    "sentText": "Thank you for contacting us. Our team will get back to you as soon as possible at the address provided.",
+    "sendAnother": "Send another message",
+    "fields": {
+      "name": "Full name",
+      "email": "Email address",
+      "subject": "Subject",
+      "subjectPlaceholder": "E.g.: Download issue, question about my account...",
+      "message": "Message",
+      "messagePlaceholder": "Describe your request..."
+    },
+    "errorText": "Sending failed. Please try again or write to us directly at {{email}}.",
+    "sending": "Sending...",
+    "submit": "Send message"
+  },
+  "login": {
+    "welcome": "Welcome to SCKOLARIS. Log in to your university space.",
+    "registrationNumber": "Registration number",
+    "identifier": "Registration number or email",
+    "identifierPlaceholder": "26SWE001 or your email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "loggingIn": "Logging in...",
+    "noAccount": "Don't have an account yet?",
+    "backToHome": "Back to home",
+    "accessDenied": "Access denied",
+    "invalidCredentials": "Incorrect identifier or password.",
+    "emailAddress": "Email address"
+  },
+  "register": {
+    "title": "Create my account",
+    "subtitle": "Join the Universite ZTF digital library",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "registerAs": "Register as",
+    "optional": "optional",
+    "photo": "ID photo (4x4 format)",
+    "choosePhoto": "Choose a photo",
+    "changePhoto": "Change photo",
+    "photoHint": "Optional — you can add a recent ID-style photo (4x4 format).",
+    "photoRequired": "The ID photo (4x4 format) is optional.",
+    "photoTooLarge": "The photo exceeds the maximum allowed size (2 MB).",
+    "takePhoto": "Take a photo",
+    "chooseFromLibrary": "From library",
+    "primaryEmail": "Primary email",
+    "emailHint": "This address must be valid and will be your primary email — you can add a secondary address later from your profile.",
+    "registrationNumberHint": "Universite ZTF official format: enrollment year (2 digits) + program code (3 letters) + sequential number (3 digits), e.g. 26SWE001.",
+    "registrationNumberHintTeacher": "Optional for a teacher — Universite ZTF doesn't systematically assign a registration number to teaching staff. If provided, it must still follow the official format (e.g. 26SWE001).",
+    "passwordHint": "At least 8 characters, with a minimum of 4 letters, 3 digits and 1 symbol (order doesn't matter).",
+    "confirmPassword": "Confirm password",
+    "registering": "Signing up...",
+    "alreadyRegistered": "Already registered?",
+    "pendingNotice": "Your registration will be validated by the library team within 24-48h. You can already browse the catalog and read online in the meantime.",
+    "passwordMismatch": "Passwords do not match."
+  },
+  "forgotPassword": {
+    "title": "Forgot password",
+    "intro": "Enter your account's email address to receive a reset link, valid for 24 hours.",
+    "sendLink": "Send link",
+    "backToLogin": "Back to login",
+    "error": "Sending failed. Please try again in a moment.",
+    "openInBrowser": "Open the link received by email in your browser to choose a new password, then come back here to log in."
+  },
+  "catalog": {
+    "intro": "Search by title, author, or subject among Universite ZTF's resources.",
+    "searchPlaceholder": "Title, author, subject...",
+    "allDomains": "All domains",
+    "allSubdomains": "All subdomains",
+    "resultCount_one": "{{count}} document in the catalog",
+    "resultCount_other": "{{count}} documents in the catalog",
+    "noResults": "No document matches your search.",
+    "pageOf": "Page {{current}} / {{last}}"
+  },
+  "reader": {
+    "title": "Reading",
+    "backAria": "Back",
+    "documentFallback": "Document",
+    "loadError": "Unable to display this document."
+  },
+  "documentDetail": {
+    "title": "Document",
+    "notFound": "Document not found.",
+    "readError": "Unable to load the document.",
+    "downloadRequiresValidated": "Downloading requires a validated account.",
+    "downloadFailed": "The download failed.",
+    "availableOffline": "Available offline in your library",
+    "readOnline": "Read online",
+    "loading": "Loading...",
+    "downloading": "Downloading...",
+    "removeFromDownloads": "Remove from my downloads",
+    "syncNotice": "Downloaded documents are tied to your SCKOLARIS account and sync automatically across your other devices — each keeps its own offline copy."
+  },
+  "myLibrary": {
+    "intro": "The documents you've downloaded, available offline on this device.",
+    "syncing": "Syncing with your other devices...",
+    "empty": "You haven't downloaded any documents yet. Open a document from the catalog and tap \"Download\" to make it available here, even offline.",
+    "remove": "Remove",
+    "offlineNotice": "These documents remain readable even without an internet connection, on this device."
+  },
+  "myDeposits": {
+    "intro": "Manage your course materials and track your deletion requests.",
+    "newDeposit": "Deposit a new course",
+    "empty": "You haven't deposited any course materials yet.",
+    "requestDeletion": "Request deletion",
+    "requestDeletionTitle": "Request deletion",
+    "requestDeletionNotice": "This action is not immediate. Your request will be submitted for an administrator's approval. The document will remain visible with the \"Deletion pending\" status until it is permanently removed.",
+    "justificationLabel": "Reason for removal *",
+    "justificationPlaceholder": "Briefly explain why this material should be removed from the catalog...",
+    "confirmRequest": "Confirm request",
+    "deleteDocumentTitle": "Delete document",
+    "deleteConfirmText": "Are you sure you want to delete \"{{title}}\"? This action is immediate and permanent.",
+    "alreadyPending": "A request is already pending for this document.",
+    "genericError": "Something went wrong, please try again."
+  },
+  "downloads": {
+    "intro": "Install SCKOLARIS on your computer or Android phone to access it directly, without going through the browser.",
+    "windows": "Windows (PC)",
+    "windowsHint": ".exe installer",
+    "androidHint": ".apk file",
+    "version": "Version",
+    "notAvailable": "Not yet available.",
+    "versionPlaceholder": "Version (e.g.: 1.0.0)",
+    "replaceFile": "Change file",
+    "chooseFile": "Choose file",
+    "chosenFile": "File chosen:",
+    "publishing": "Publishing...",
+    "publish": "Publish",
+    "versionRequired": "Enter the version number (e.g.: 1.0.0) before publishing.",
+    "fileRequired": "Choose the file to publish.",
+    "wrongFileType": "The file must be a {{ext}}.",
+    "uploadFailed": "Failed to upload the file.",
+    "deleteFailed": "Deletion failed. Please try again.",
+    "iosNotice": "iOS is not distributed this way — installing an app on iPhone requires going through TestFlight (invitation link sent separately).",
+    "deleteInstallerTitle": "Delete installer",
+    "deleteConfirmText": "Are you sure you want to delete the \"{{platform}}\" installer? It will no longer be offered for download until a new file is published.",
+    "deleting": "Deleting..."
+  },
+  "deposit": {
+    "title": "Deposit a course",
+    "shortTitle": "Deposit material",
+    "intro": "Add new educational documents to the Universite ZTF digital library.",
+    "titleLabel": "Course title",
+    "titlePlaceholder": "E.g.: Introduction to quantum mechanics",
+    "domain": "Domain *",
+    "subdomain": "Subdomain *",
+    "program": "Program",
+    "programPlaceholder": "E.g.: Computer Science",
+    "summary": "Summary",
+    "coverImage": "Cover image",
+    "changeImage": "Change image",
+    "addImage": "Add an image",
+    "coverHint": "Optional — JPG, PNG, or WEBP, 2 MB max.",
+    "indexNotice": "This material will be automatically indexed and will appear in catalog search results just like any other document.",
+    "attachedFile": "Attached file *",
+    "noFileSelected": "No file selected",
+    "acceptedFormats": "PDF, DOCX, PPTX (max 500 MB)",
+    "browseFiles": "Browse files",
+    "publishing": "Publishing...",
+    "publish": "Publish the course",
+    "fileRequired": "A file is required."
+  },
+  "editDeposit": {
+    "title": "Edit course",
+    "forbidden": "You can only edit your own documents.",
+    "replaceFile": "Replace file (optional)",
+    "chooseFile": "Choose a file",
+    "saving": "Saving..."
+  },
+  "domains": {
+    "intro": "Organize the catalog by domain and subdomain.",
+    "newDomain": "New domain",
+    "empty": "No domains yet. Create one to classify deposited documents.",
+    "editAria": "Edit {{name}}",
+    "deleteAria": "Delete {{name}}",
+    "noSubdomains": "No subdomains in this domain.",
+    "addSubdomain": "Add a subdomain",
+    "editDomain": "Edit domain",
+    "newSubdomain": "New subdomain",
+    "editSubdomain": "Edit subdomain",
+    "name": "Name",
+    "deleteDomainTitle": "Delete domain",
+    "deleteSubdomainTitle": "Delete subdomain",
+    "deleteConfirmText": "Are you sure you want to delete \"{{label}}\"?"
+  },
+  "roles": {
+    "student": "Student",
+    "teacher": "Teacher",
+    "admin": "Administrator"
+  },
+  "pendingAccount": {
+    "title": "Account pending validation",
+    "text": "Your account has been created successfully. An administrator must now approve your access.",
+    "callout": "In the meantime, you can already browse the catalog and read online, but downloading is disabled.",
+    "goToCatalog": "Go to catalog"
+  },
+  "accessDenied": {
+    "text": "We were unable to validate your SCKOLARIS account. This may be due to an incorrect registration number or missing information.",
+    "callout": "If you believe this is an error, contact the library service at the Bertoua campus.",
+    "retry": "Retry registration"
+  },
+  "pendingAccounts": {
+    "intro": "Approve or reject new registrations.",
+    "loadError": "Unable to load pending accounts. Please try again.",
+    "empty": "No pending accounts.",
+    "registeredOn": "Registered on {{date}}",
+    "reject": "Reject",
+    "validate": "Approve"
+  },
+  "deletionRequests": {
+    "title": "Deletion requests",
+    "intro": "Documents whose removal was requested by a teacher.",
+    "empty": "No pending requests.",
+    "review": "Review"
+  },
+  "deletionRequestDetail": {
+    "title": "Deletion request",
+    "backToList": "Back to list",
+    "notFound": "Request not found.",
+    "documentTitle": "Title",
+    "originalAuthor": "Author",
+    "depositedBy": "Deposited by",
+    "subjectCourse": "Subject",
+    "requestDate": "Request date",
+    "status": "Status",
+    "reason": "Justification",
+    "rejectRequest": "Reject",
+    "approveRequest": "Approve",
+    "genericError": "Something went wrong."
+  },
+  "profile": {
+    "title": "My Profile",
+    "intro": "Manage your personal information and security settings.",
+    "personalInfo": "Personal Information",
+    "studyDomain": "Field of study",
+    "other": "Other",
+    "otherDomainPlaceholder": "Enter your field of study",
+    "otherProgramPlaceholder": "Enter your program",
+    "selectDomainFirst": "Select a field first",
+    "changePhoto": "Change photo",
+    "optional": "Optional",
+    "profileUpdated": "Profile updated.",
+    "saveChanges": "Save changes",
+    "readOnlyNotice": "Only the registration number cannot be changed.",
+    "security": "Security",
+    "passwordUpdated": "Password updated.",
+    "currentPassword": "Current password",
+    "updating": "Updating...",
+    "update": "Update"
+  },
+  "resetPassword": {
+    "newPassword": "New password"
+  },
+  "userDetail": {
+    "title": "User",
+    "backToList": "Back to list",
+    "notFound": "User not found.",
+    "primaryEmail": "Primary email",
+    "secondaryEmail": "Secondary email",
+    "role": "Role",
+    "registeredOn": "Registered on",
+    "depositedDocuments": "Deposited documents",
+    "downloads": "Downloads",
+    "adminActions": "Administrator actions",
+    "changeRole": "Change role",
+    "updateRole": "Update role",
+    "accountActivation": "Account activation",
+    "cannotDeactivateSelf": "You cannot deactivate your own account.",
+    "genericError": "Something went wrong. Please try again."
+  },
+  "users": {
+    "title": "Users",
+    "intro": "Overview of all Universite ZTF accounts.",
+    "searchPlaceholder": "Name, email, registration number...",
+    "filterAll": "All",
+    "filterValidated": "Validated",
+    "filterRejected": "Rejected",
+    "loadError": "Unable to load the user list. Please try again.",
+    "resultCount_one": "{{count}} account for this filter",
+    "resultCount_other": "{{count}} accounts for this filter",
+    "noneForFilter": "No account for this filter.",
+    "deactivatedSuffix": "deactivated",
+    "deactivate": "Deactivate",
+    "reactivate": "Reactivate"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "seeAll": "See all",
+    "latestAdditions": "Latest catalog additions",
+    "greeting": "Hello, {{name}}",
+    "notifications": "Notifications",
+    "noNotifications": "No notifications at the moment."
+  },
+  "studentDashboard": {
+    "searchPlaceholder": "Search the catalog...",
+    "downloadPending": "Downloading will be available once your account is validated by an administrator.",
+    "noDownloads": "You haven't downloaded any documents yet."
+  },
+  "teacherDashboard": {
+    "welcome": "Welcome to your teacher dashboard.",
+    "recentDeposits": "My recent deposits"
+  },
+  "adminDashboard": {
+    "title": "Administrator Dashboard",
+    "intro": "Overall view of Universite ZTF digital library activity.",
+    "pendingAccountsHint": "Validations required for full access.",
+    "deletionRequestsHint": "Requests awaiting approval.",
+    "myDepositsHint": "Deposit or manage your own course materials.",
+    "validatedAccounts": "Validated accounts",
+    "catalogDocuments": "Catalog documents",
+    "deposit": "Deposit"
+  },
+  "termsGate": {
+    "welcome": "Welcome to SCKOLARIS",
+    "subtitle": "Universite ZTF University Digital Library",
+    "intro": "Before continuing, please review SCKOLARIS's terms of use (catalog usage, responsibility for deposits, account security) and our privacy policy (data collected, retention, your rights).",
+    "readTerms": "Read the terms of use",
+    "readPrivacy": "Read the privacy policy",
+    "acceptLabel": "I have read and accept SCKOLARIS's terms of use and privacy policy.",
+    "continue": "Continue"
+  },
+  "statistics": {
+    "loadError": "Unable to load statistics right now.",
+    "intro": "Analysis of platform activity, computed in R.",
+    "seeConclusions": "See conclusions in plain language",
+    "seriesSubtitle": "Last 90 days (chart: last 30 days)",
+    "seriesTotal": "Total: {{total}} {{unit}} — including {{last30}} in the last 30 days",
+    "downloadsPerDay": "Downloads per day",
+    "downloadsUnit": "downloads",
+    "onlineNow": "Online now",
+    "snapshot": "Snapshot, not a history",
+    "activeUsersPerDay": "Active users per day",
+    "activeUsersUnit": "active users",
+    "readsPerDay": "Online reads per day",
+    "readsUnit": "reads",
+    "newRegistrationsPerDay": "New registrations per day",
+    "registrationsUnit": "registrations",
+    "accountBreakdown": "Account breakdown",
+    "byStatus": "By status",
+    "catalogByDomain": "Catalog by domain",
+    "documentsPerSubdomain": "Number of documents per subdomain",
+    "mostActiveTeachers": "Most active teachers",
+    "top10ByDeposits": "Top 10 by number of deposits"
+  },
+  "summary": {
+    "title": "Conclusions",
+    "intro": "What the numbers say, explained simply — no jargon.",
+    "noAccountsYet": "No accounts registered yet.",
+    "trendStable": "stays roughly stable over the period",
+    "trendIncrease": "increases by about {{amount}} {{unit}} per week",
+    "trendDecrease": "decreases by about {{amount}} {{unit}} per week",
+    "units": {
+      "download_one": "download",
+      "download_other": "downloads",
+      "read_one": "read",
+      "read_other": "reads",
+      "person_one": "person",
+      "person_other": "people",
+      "registration_one": "registration",
+      "registration_other": "registrations"
+    },
+    "overview": {
+      "title": "Overview of the last 3 months",
+      "downloadsPhrase_one": "{{count}} download",
+      "downloadsPhrase_other": "{{count}} downloads",
+      "readsPhrase_one": "{{count}} online read",
+      "readsPhrase_other": "{{count}} online reads",
+      "mainSentence": "The library recorded {{downloads}} and {{reads}}.",
+      "noneYet": "No one has downloaded or read a document during this period yet.",
+      "trendSentence": "The number of downloads {{downloadsTrend}}, and the number of online reads {{readsTrend}}.",
+      "preferRead": "Users generally prefer reading directly rather than downloading the file.",
+      "preferDownload": "Users generally prefer downloading the file rather than reading it directly."
+    },
+    "activity": {
+      "title": "Activity",
+      "onlineStatus_one": "Of the {{total}} registered accounts, {{count}} is currently online.",
+      "onlineStatus_other": "Of the {{total}} registered accounts, {{count}} are currently online.",
+      "trendSentence": "The number of people active each day {{activityTrend}}, and the number of new registrations {{registrationsTrend}}."
+    },
+    "accounts": {
+      "title": "User accounts",
+      "statusPending": "pending validation",
+      "statusValidated": "validated",
+      "statusRejected": "permanently rejected",
+      "statusCount": "{{count}} {{status}}",
+      "totalBreakdown_one": "Out of {{count}} account in total, {{breakdown}}.",
+      "totalBreakdown_other": "Out of {{count}} accounts in total, {{breakdown}}.",
+      "pendingWarning_one": "{{count}} account is still awaiting a decision — remember to review it in \"Pending accounts\".",
+      "pendingWarning_other": "{{count}} accounts are still awaiting a decision — remember to review them in \"Pending accounts\"."
+    },
+    "catalog": {
+      "title": "The catalog",
+      "documentsClause_one": "The catalog contains {{count}} document in total",
+      "documentsClause_other": "The catalog contains {{count}} documents in total",
+      "domainsClause_one": ", spread across {{count}} domain.",
+      "domainsClause_other": ", spread across {{count}} domains.",
+      "busiest_one": " The best-stocked domain is \"{{domain}}\" with {{count}} document.",
+      "busiest_other": " The best-stocked domain is \"{{domain}}\" with {{count}} documents.",
+      "emptyIntro_one": "{{count}} subdomain has no documents yet",
+      "emptyIntro_other": "{{count}} subdomains have no documents yet",
+      "emptyListShort": ": {{list}}.",
+      "emptyListLong": ", including {{list}}, and others."
+    },
+    "depositors": {
+      "title": "Top contributing teachers",
+      "none": "No teacher has deposited any course material yet.",
+      "leader_one": "{{name}} is the teacher who has deposited the most materials, with {{count}} document.",
+      "leader_other": "{{name}} is the teacher who has deposited the most materials, with {{count}} documents.",
+      "followedBy": " Followed by {{names}}."
+    }
+  },
+  "chatbot": {
+    "title": "Assistant Intelligent SCKOLARIS Universite ZTF",
+    "greeting": "Hello. How can I help you?",
+    "placeholder": "Ask your question...",
+    "openAssistant": "Open the SCKOLARIS assistant",
+    "loading": "Generating a reply...",
+    "error": "The assistant is temporarily unavailable. Please try again shortly."
+  },
+  "about": {
+    "hero": {
+      "title": "Academic Excellence at Your Fingertips",
+      "text": "Universite ZTF's SCKOLARIS digital library is the intellectual heart of our institution. Dedicated to supporting research, teaching, and learning, it offers seamless access to thousands of rigorously curated academic resources."
+    },
+    "institution": "Institution of Knowledge",
+    "local": {
+      "title": "Local Roots, Global Vision",
+      "text": "Located in Bertoua, Universite ZTF is committed to raising the level of education in the region while connecting our students to international academic standards. SCKOLARIS is the tool that removes geographic barriers, giving our researchers access to knowledge from around the world."
+    },
+    "missionTitle": "Our Mission",
+    "mission": {
+      "access": {
+        "title": "Accessibility",
+        "text": "Making academic resources available 24/7 for all our students."
+      },
+      "quality": {
+        "title": "Quality",
+        "text": "Ensuring the rigor and relevance of the books and publications offered."
+      },
+      "community": {
+        "title": "Community",
+        "text": "Bringing researchers and students together around a shared learning space."
+      }
+    }
+  }
+}

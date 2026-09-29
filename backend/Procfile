@@ -1,0 +1,5 @@
+# Ignoré tant que backend/Dockerfile existe — Railway bascule sur un build
+# Docker dès qu'un Dockerfile est présent et n'utilise plus ce fichier ni
+# nixpacks.toml. Conservé pour mémoire de la séquence de démarrage
+# équivalente (désormais dans docker/entrypoint.sh).
+web: php artisan migrate --force && php artisan db:seed --class=AdminSeeder --force && php artisan storage:link && php artisan config:cache && php artisan route:cache && frankenphp run --config /Caddyfile --adapter caddyfile

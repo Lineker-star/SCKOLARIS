@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+
+  --color-surface: #f8f9ff;
+  --color-surface-dim: #d1dbeb;
+  --color-surface-bright: #f8f9ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e5eeff;
+  --color-surface-container-high: #e0e9f9;
+  --color-surface-container-highest: #dae3f3;
+  --color-on-surface: #131c28;
+  --color-on-surface-variant: #43474f;
+  --color-inverse-surface: #28313d;
+  --color-inverse-on-surface: #eaf1ff;
+  --color-outline: #747780;
+  --color-outline-variant: #c4c6d0;
+
+  --color-primary: #001c40;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #0a3161;
+  --color-on-primary-container: #7c9ad1;
+  --color-inverse-primary: #aac7ff;
+
+  --color-secondary: #765b00;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #fdd264;
+  --color-on-secondary-container: #755a00;
+
+  --color-tertiary: #341400;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #542400;
+  --color-on-tertiary-container: #d1895b;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-success: #2f8f5b;
+  --color-success-container: #e3f5eb;
+
+  --color-background: #f8f9ff;
+  --color-on-background: #131c28;
+  --color-surface-variant: #dae3f3;
+
+  --radius-sm: 0.125rem;
+  --radius-DEFAULT: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  --container-max-width: 1200px;
+
+  /* Footer stays a fixed dark navy band in both themes — it must not invert
+     with bg-primary, otherwise dark mode gets a jarring bright strip. */
+  --color-footer: #051224;
+  --color-footer-high: #0b1e38;
+  --color-on-footer: #eaf1ff;
+  --color-on-footer-muted: #93a8cf;
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-surface: #10151f;
+  --color-surface-dim: #0a0e17;
+  --color-surface-bright: #1c2433;
+  --color-surface-container-lowest: #0a0e17;
+  --color-surface-container-low: #151b28;
+  --color-surface-container: #1a2130;
+  --color-surface-container-high: #20293a;
+  --color-surface-container-highest: #263143;
+  --color-on-surface: #e6ebf5;
+  --color-on-surface-variant: #b3bac8;
+  --color-inverse-surface: #e6ebf5;
+  --color-inverse-on-surface: #131c28;
+  --color-outline: #8a90a0;
+  --color-outline-variant: #38405290;
+
+  --color-primary: #aac7ff;
+  --color-on-primary: #002c5f;
+  --color-primary-container: #0a3161;
+  --color-on-primary-container: #d6e2ff;
+  --color-inverse-primary: #0a3161;
+
+  --color-secondary: #fdd264;
+  --color-on-secondary: #3d2f00;
+  --color-secondary-container: #584300;
+  --color-on-secondary-container: #fdd264;
+
+  --color-tertiary: #e0a074;
+  --color-on-tertiary: #4a1f00;
+  --color-tertiary-container: #6b3010;
+  --color-on-tertiary-container: #f0c3a4;
+
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  --color-success: #8fdcb0;
+  --color-success-container: #1c4a30;
+
+  --color-background: #10151f;
+  --color-on-background: #e6ebf5;
+  --color-surface-variant: #38405290;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-sans);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+@keyframes dashboard-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-18%); }
+}
+
+.dashboard-marquee {
+  display: inline-block;
+  animation: dashboard-marquee 18s linear infinite;
+}

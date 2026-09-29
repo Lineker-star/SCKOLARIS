@@ -1,0 +1,15 @@
+# EAS Build compresse tout le dépôt git depuis sa racine (pas seulement le
+# sous-dossier du projet Expo) — voir https://expo.fyi/eas-build-archive.
+# Rien de ce qui suit n'est nécessaire pour compiler frontend-mobile : EAS
+# fait son propre `npm install` sur ses serveurs, et l'app mobile n'a
+# jamais besoin du code source du backend/desktop/web, seulement de leur
+# API en ligne au moment de l'exécution.
+node_modules
+**/node_modules
+
+backend/
+frontend-web/
+frontend-desktop/
+
+frontend-mobile/dist-web
+frontend-mobile/.expo

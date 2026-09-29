@@ -1,0 +1,54 @@
+{
+  "expo": {
+    "name": "SCKOLARIS - Universite ZTF",
+    "slug": "e-biblio-iu-ztf",
+    "scheme": "ebiblio",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "cm.iuztf.ebiblio"
+    },
+    "android": {
+      "package": "cm.iuztf.ebiblio",
+      "adaptiveIcon": {
+        "backgroundColor": "#001c40",
+        "foregroundImage": "./assets/android-icon-foreground.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-web-browser",
+      "expo-image",
+      "expo-sharing",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "SCKOLARIS a besoin d'accéder à vos photos pour choisir une photo de profil ou d'identité.",
+          "cameraPermission": "SCKOLARIS a besoin d'accéder à l'appareil photo pour prendre une photo de profil ou d'identité."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true,
+            "buildArchs": ["arm64-v8a"],
+            "enableMinifyInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "fce03503-d836-41f1-872a-89eb8e18fb33"
+      }
+    }
+  }
+}
