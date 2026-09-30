@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import TextField from '../components/TextField'
 import { MapPinIcon, PhoneIcon, MailIcon, ClockIcon, SendIcon, CheckIcon } from '../components/icons'
 import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONES } from '../config/brand'
@@ -209,8 +208,6 @@ export default function Contact() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   )
 }

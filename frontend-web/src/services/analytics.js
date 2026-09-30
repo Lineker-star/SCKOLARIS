@@ -18,13 +18,6 @@ export function setConsent(value) {
   if (value === 'accepted') loadPlausible()
 }
 
-// Permet de rouvrir le bandeau (ex: lien "Gérer les cookies" du pied de
-// page) sans recharger la page.
-export function resetConsent() {
-  localStorage.removeItem(CONSENT_KEY)
-  window.dispatchEvent(new CustomEvent(CONSENT_CHANGE_EVENT, { detail: null }))
-}
-
 let loaded = false
 
 export function loadPlausible() {
