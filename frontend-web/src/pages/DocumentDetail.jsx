@@ -8,12 +8,13 @@ import { downloadDocument } from '../services/documents'
 import { removeFromLibrary } from '../services/library'
 import { saveOfflineDocument, getOfflineDocument, removeOfflineDocument } from '../services/offlineStore'
 import { formatDate } from '../utils/format'
-import { BookOpenIcon, DownloadIcon, CalendarIcon, UserIcon, CheckIcon, TrashIcon, FileIcon } from '../components/icons'
+import { BookOpenIcon, DownloadIcon, CalendarIcon, UserIcon, CheckIcon, TrashIcon, FileIcon, SparklesIcon } from '../components/icons'
 
 // Chargé à la demande : pdf.js (~130 Ko gzippés) ne doit peser que sur les
 // utilisateurs qui ouvrent effectivement le livre, pas sur chaque visite
 // d'une fiche document.
 const ReaderModal = lazy(() => import('../components/ReaderModal'))
+const AskAiPanel = lazy(() => import('../components/AskAiPanel'))
 
 // Récupère la couverture en tant que blob (pour un stockage hors-ligne
 // réellement disponible sans réseau, comme le PDF) — retourne null si
@@ -38,6 +39,7 @@ export default function DocumentDetail() {
   const [error, setError] = useState('')
   const [offline, setOffline] = useState(null)
   const [reading, setReading] = useState(false)
+  const [asking, setAsking] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -186,6 +188,16 @@ export default function DocumentDetail() {
                   {t('documentDetail.removeFromDownloads')}
                 </button>
               )}
+
+              <button
+                onClick={() => setAsking(true)}
+                disabled={doc.ai_index_status !== 'indexed'}
+                title={doc.ai_index_status !== 'indexed' ? t('askAi.notIndexedYet') : undefined}
+                className="inline-flex items-center gap-2 rounded border border-outline px-5 py-2.5 text-sm font-semibold text-on-surface hover:bg-surface-container disabled:opacity-50"
+              >
+                <SparklesIcon width={18} height={18} />
+                {t('askAi.buttonLabel')}
+              </button>
             </div>
             <p className="mt-3 text-xs text-on-surface-variant">{t('documentDetail.syncNotice')}</p>
           </div>
@@ -203,6 +215,12 @@ export default function DocumentDetail() {
           }
         >
           <ReaderModal documentId={id} title={doc?.title} onClose={() => setReading(false)} />
+        </Suspense>
+      )}
+
+      {asking && (
+        <Suspense fallback={null}>
+          <AskAiPanel documentId={Number(id)} documentTitle={doc?.title} onClose={() => setAsking(false)} />
         </Suspense>
       )}
     </DashboardLayout>

@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import Pdf from 'react-native-pdf'
-import { ArrowLeftIcon } from '../components/icons'
+import { ArrowLeftIcon, SparklesIcon } from '../components/icons'
+import { useAiChat } from '../context/AiChatContext'
 
 // Lecteur PDF interne — remplace l'ancien renvoi vers une app externe
 // (expo-sharing) : le document téléchargé/lu s'affiche directement dans
@@ -13,7 +14,8 @@ export default function DocumentReaderScreen() {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { params } = useRoute()
-  const { uri, title } = params
+  const { uri, title, documentId } = params
+  const { openForDocument } = useAiChat()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -26,6 +28,15 @@ export default function DocumentReaderScreen() {
         <Text numberOfLines={1} className="flex-1 font-semibold text-on-surface dark:text-on-surface-night">
           {title ?? t('reader.documentFallback')}
         </Text>
+        {documentId ? (
+          <Pressable
+            onPress={() => openForDocument(documentId, title)}
+            accessibilityLabel={t('askAi.buttonLabel')}
+            className="flex-row items-center gap-1.5 rounded bg-primary-container dark:bg-primary-container-night px-3 py-1.5"
+          >
+            <SparklesIcon width={16} height={16} className="text-on-primary-container dark:text-on-primary-container-night" />
+          </Pressable>
+        ) : null}
       </View>
 
       <View className="flex-1">

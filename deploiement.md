@@ -101,6 +101,17 @@ La commande `users:mark-expired-offline` (marque `is_online = false` quand le je
 
 Sans planificateur actif, le statut "en ligne" reste bloqué sur `true` indéfiniment après l'expiration d'un jeton (1 jour) — l'app continue de fonctionner normalement, seul cet indicateur admin devient trompeur.
 
+### Worker de queue (obligatoire — indexation IA des documents)
+`IndexDocumentForAi` (voir `app/Jobs/`, déclenché automatiquement à chaque dépôt/remplacement de fichier dans `DocumentController`) passe par la connexion de queue `database` (déjà configurée, table `jobs` déjà migrée) — mais **rien ne consomme cette file en production** : `docker/entrypoint.sh` ne lance que le serveur web, jamais `queue:work`. Sans worker, les jobs s'accumulent dans la table `jobs` sans jamais s'exécuter : les documents restent indéfiniment au statut `pending` dans le dashboard admin IA (`/admin/ai/documents`), sans erreur visible ailleurs.
+
+**Configuration** : exactement le même montage que le planificateur ci-dessus (nouveau service Railway, même dépôt, `Root Directory = backend`), avec :
+- **Cron Schedule** : `*/5 * * * *` (toutes les 5 minutes — largement suffisant, un dépôt de document n'est pas une action urgente).
+- **Custom Start Command** : `php artisan queue:work --stop-when-empty --max-time=240`
+  (`--stop-when-empty` : le worker s'arrête dès que la file est vide plutôt que de tourner indéfiniment entre deux déclenchements cron ; `--max-time=240` : filet de sécurité qui l'arrête après 4 minutes même en cas de job bloqué, avant le prochain déclenchement.)
+- Variables d'environnement : copier celles du service backend, comme pour le planificateur — `GEMINI_API_KEY`/`GEMINI_EMBEDDING_MODEL` sont indispensables ici (le job en a besoin pour calculer les embeddings).
+
+Un seul et même service Railway peut cumuler les deux commandes (planificateur + queue) en les combinant dans un script, mais garder deux services séparés (un par commande) reste plus simple à diagnostiquer en cas de panne — c'est l'approche documentée ici.
+
 ### Sauvegarde
 - Base PostgreSQL : dump quotidien minimum (`pg_dump`), conservé **hors** du serveur applicatif.
 - Fichiers déposés (`storage/app/documents/`, disque privé — les supports de cours) et `storage/app/public/avatars/` : sauvegarde quotidienne également.
@@ -230,3 +241,4 @@ Le script appelle `curl.exe` en multipart avec l'en-tête `X-Release-Token`, val
   - Formulaire de contact (`Contact.jsx`) : `ContactController`/`Mail::` existent côté backend et sont prêts (testés), mais **volontairement pas utilisés pour l'instant** — décision explicite de rester sur formsubmit.co → `davidjosiassampa@gmail.com` en attendant. Pour basculer plus tard : remplacer l'appel `fetch('https://formsubmit.co/...')` de `Contact.jsx` par `sendContactMessage()` (`services/contact.js`, déjà écrit), et définir `CONTACT_EMAIL` sur Railway.
 - [ ] R installé sur le serveur backend (`Rscript --version` doit répondre) — voir §1 "Cas concret : Railway" pour l'historique complet (deux mécanismes Railpack essayés et ignorés, remplacés par `backend/Dockerfile`). **Confirmé fonctionnel en production** : R, `pdo_pgsql` et `gd` ont tous démarré correctement dès le premier déploiement Docker ; seule une erreur de syntaxe dans `docker/Caddyfile` (corrigée depuis) a empêché le serveur web de démarrer au tout premier essai. *(sans R, la page Statistiques du dashboard admin renvoie une erreur claire plutôt qu'un plantage, mais reste inutilisable — voir StatsController)*
 - [ ] Planificateur de tâches Railway (service Cron Job) : vérifier que son **Root Directory** est bien réglé sur `backend` (ne se copie pas automatiquement depuis le service backend — a fait échouer la première tentative avec `railpack prepare exited with an error`) et que ses variables d'environnement sont à jour (copiées depuis le service backend via Variables → Raw Editor). *(voir §1 pour la procédure complète)*
+- [ ] Worker de queue Railway configuré pour l'indexation IA (`IndexDocumentForAi`) — même montage que le planificateur ci-dessus, `Custom Start Command = php artisan queue:work --stop-when-empty --max-time=240`, `Cron Schedule = */5 * * * *`. Sans lui, les documents déposés restent indéfiniment au statut `pending` dans `/administration-ia`, sans erreur visible ailleurs. *(voir §1 « Worker de queue »)*

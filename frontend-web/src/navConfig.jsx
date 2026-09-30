@@ -10,6 +10,7 @@ import {
   ChartBarIcon,
   DownloadIcon,
   HelpCircleIcon,
+  SparklesIcon,
 } from './components/icons'
 
 const icon = (Cmp) => <Cmp width={20} height={20} />
@@ -49,6 +50,7 @@ export function navForRole(role, t) {
     { to: '/mes-depots', label: t('nav.myDeposits'), icon: icon(FolderIcon) },
     { to: '/domaines', label: t('nav.domains'), icon: icon(ChartBarIcon) },
     { to: '/statistiques', label: t('nav.statistics'), icon: icon(ChartBarIcon) },
+    { to: '/administration-ia', label: t('nav.aiAdmin'), icon: icon(SparklesIcon) },
     { to: '/utilisateurs', label: t('nav.users'), icon: icon(UsersIcon) },
     { to: '/comptes-en-attente', label: t('nav.pendingAccounts'), icon: icon(ShieldCheckIcon) },
     { to: '/demandes-de-suppression', label: t('nav.deletionRequests'), icon: icon(TrashIcon) },

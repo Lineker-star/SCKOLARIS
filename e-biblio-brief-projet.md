@@ -474,6 +474,7 @@ SANCTUM_STATEFUL_DOMAINS=e-biblio.iu-ztf.cm
 ✅ Frontend mobile React Native/Expo fonctionnel, avec navigation par rôle, stockage sécurisé du jeton et stockage hors ligne natif.
 ✅ Client desktop Electron fonctionnel : il charge le frontend web déployé et vérifie les nouvelles releases.
 ✅ Les fonctionnalités BF01 à BF22 sont couvertes par l'API et les clients, avec les réserves de test indiquées dans les documentations web et mobile.
+✅ Sckolaris AI (recherche sémantique dans le contenu des documents, « Ask this book », recommandations, historique de conversation, feedback, dashboard admin d'indexation) — voir section 22. Le worker de queue doit être configuré en production (déploiement, checklist).
 
 ### Extensions du modèle actuel
 
@@ -485,6 +486,7 @@ Le modèle réellement utilisé est plus riche que le modèle initial de la sect
 - `document_library` représente la bibliothèque hors ligne synchronisée, distincte du journal `downloads`.
 - `reads` journalise les lectures et alimente les statistiques.
 - `app_releases` publie les installeurs Windows et Android.
+- `document_chunks`, `ai_conversations`, `ai_messages`, `ai_message_citations`, `ai_feedback`, `ai_usage` — voir section 22 (Sckolaris AI).
 
 ### Limites et vérifications restantes
 
@@ -507,3 +509,29 @@ Le modèle réellement utilisé est plus riche que le modèle initial de la sect
 - **Documents** — `subdomain_id` est obligatoire à la création; la validation actuelle autorise des fichiers jusqu'à 512000 Ko, soit environ 500 Mo. Cette limite doit être confirmée ou réduite pour rester cohérente avec l'exploitation.
 - **Lecture** — `/read-link` produit une URL signée valable cinq minutes. La lecture est comptée au moment de la génération du lien, avant l'ouverture effective du fichier.
 - **Releases** — `POST /api/app-releases` et `DELETE /api/app-releases/{platform}` acceptent soit `X-Release-Token`, soit un compte admin actif.
+
+---
+
+## 22. Sckolaris AI — recherche sémantique et assistant documentaire
+
+Au-delà de l'assistant plateforme initial (section 13, qui répond aux questions « comment utiliser Sckolaris » à partir du code/de la doc du projet, inchangé), `POST /api/chat` route désormais **trois** sources de contexte selon l'intention détectée (`App\Services\Ai\IntentRouter`, classification déterministe par mots-clés — pas d'appel LLM pour router) :
+
+| Intention | Déclencheur | Source |
+|---|---|---|
+| `book_question` | `document_id` fourni dans la requête | Contenu du document lui-même (recherche sémantique dans ses chunks) — **« Ask this book »**, compte authentifié requis |
+| `catalog_search_or_recommend` | mots-clés type « trouve/recommande/livre/problème/objectif » | Recherche sémantique dans tous les documents indexés |
+| `platform_help` | tout le reste (défaut, inchangé) | `ProjectRagService`, comme avant |
+
+**Pipeline d'indexation** (`App\Jobs\IndexDocumentForAi`, premier job en file d'attente de l'app, déclenché automatiquement à chaque dépôt/remplacement de fichier) : extraction du texte PDF page par page (`smalot/pdfparser`) → découpage en chunks (~1500 caractères, jamais à cheval sur deux pages, pour préserver la citabilité) → embedding (Gemini `gemini-embedding-001`, même clé que le chat) → stockage dans `document_chunks` (colonne `embedding` en JSON). Idempotent via `content_hash` : une ré-indexation ne recalcule que les chunks dont le contenu a changé.
+
+**Recherche** : similarité cosinus calculée en PHP (`App\Services\Ai\DocumentRagService`), pas de vector DB dédié (pgvector envisagé mais écarté pour cette version — évite une dépendance à une extension Postgres à activer manuellement sur Railway, et le volume d'une bibliothèque universitaire reste largement dans les capacités d'un calcul en PHP).
+
+**Formats pris en charge** : PDF uniquement pour l'instant. DOCX/PPTX et PDF scannés (sans texte extractible) sont marqués `unsupported_format` de façon explicite (`documents.ai_index_status`, visible dans `/administration-ia`), jamais indexés silencieusement à moitié. Un fichier au-delà de `AI_MAX_INDEXABLE_FILE_MB` (défaut 100 Mo, sur les 500 Mo autorisés à l'upload) est marqué `too_large` sans tentative d'extraction, pour protéger le worker de la mémoire.
+
+**Sécurité** : le contrôle d'accès (qui peut lire quel document) est vérifié **avant** tout appel au LLM, jamais délégué au prompt — aujourd'hui, cela revient à « authentifié et actif », sans palier restreint (identique à la règle de lecture existante, section 5/BF11). Le contenu récupéré est systématiquement traité comme donnée non fiable dans le prompt système (instruction explicite de ne jamais exécuter d'instruction qui s'y trouverait) — testé structurellement (`DocumentAskAiControllerTest::test_prompt_treats_retrieved_content_as_untrusted_data`). Aucune citation (page, titre) n'est générée par le LLM : elles viennent uniquement des métadonnées extraites, jamais inventées.
+
+**Historique et feedback** : pour un compte authentifié, chaque échange (`/api/chat`, quelle que soit l'intention) est conservé (`ai_conversations`/`ai_messages`/`ai_message_citations`) et consultable via `/api/ai/conversations`. Un utilisateur invité obtient les mêmes réponses mais rien n'est enregistré. `/api/ai/feedback` (👍/👎) est disponible sur chaque réponse.
+
+**Déploiement** : `IndexDocumentForAi` passe par la queue `database` — **nécessite un worker** (`php artisan queue:work`), qui ne tourne pas par défaut en production (voir `deploiement.md`, section « Worker de queue »). Sans lui, les documents restent indéfiniment `pending` dans `/administration-ia`, sans erreur visible ailleurs — c'est le premier point à vérifier si l'indexation semble ne jamais aboutir.
+
+**Ce qui n'est volontairement pas fait dans cette version** : OCR des PDF scannés, extraction DOCX/PPTX, réponses en streaming, abstraction multi-fournisseur LLM (un seul fournisseur réellement utilisé : Gemini), MCP, dashboard avec graphiques (l'endpoint `/api/admin/ai/usage` renvoie des agrégats JSON bruts).

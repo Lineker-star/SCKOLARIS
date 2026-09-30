@@ -3,10 +3,13 @@
 namespace App\Services;
 
 use App\Models\RagChunk;
+use App\Services\Ai\Concerns\RedactsSecrets;
 use Symfony\Component\Finder\Finder;
 
 class ProjectRagService
 {
+    use RedactsSecrets;
+
     private const MAX_CHUNK_LENGTH = 1800;
     private const MAX_RESULTS = 5;
 
@@ -166,12 +169,6 @@ class ProjectRagService
         }
 
         return $chunks;
-    }
-
-    private function redactSecrets(string $content): string
-    {
-        $content = preg_replace('/\b(?:ANTHROPIC_API_KEY|GOOGLE_API_KEY|API_KEY|SECRET_KEY|ACCESS_TOKEN)\s*[:=]\s*[^\s`]+/i', '[SECRET_REDACTED]', $content);
-        return preg_replace('/\bsk-ant-[A-Za-z0-9_-]{20,}\b/', '[API_KEY_REDACTED]', $content) ?? $content;
     }
 
     private function relativePath(string $path): string

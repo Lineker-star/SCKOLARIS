@@ -12,6 +12,7 @@
     "next": "Suivant",
     "previous": "Précédent",
     "search": "Rechercher",
+    "reset": "Réinitialiser le filtre",
     "download": "Télécharger",
     "read": "Lire",
     "add": "Ajouter",
@@ -43,6 +44,7 @@
     "myDeposits": "Mes dépôts",
     "domains": "Domaines",
     "statistics": "Statistiques",
+    "aiAdmin": "Administration IA",
     "users": "Utilisateurs",
     "pendingAccounts": "Comptes en attente",
     "deletionRequests": "Demandes de suppression",
@@ -622,6 +624,34 @@
     "openAssistant": "Ouvrir l'assistant SCKOLARIS",
     "loading": "Réponse en cours...",
     "error": "L'assistant est momentanément indisponible. Réessayez dans un instant."
+  },
+  "askAi": {
+    "buttonLabel": "Demander à Sckolaris AI",
+    "title": "Sckolaris AI",
+    "greeting": "Posez-moi une question sur ce document : de quoi il parle, un résumé, un chapitre précis...",
+    "placeholder": "Votre question sur ce document...",
+    "sources": "Sources",
+    "page": "p. {{page}}",
+    "notIndexedYet": "Ce document n'est pas encore prêt pour l'assistant IA — réessayez un peu plus tard.",
+    "feedbackPrompt": "Cette réponse vous a-t-elle été utile ?",
+    "feedbackThanks": "Merci pour votre retour."
+  },
+  "aiAdmin": {
+    "title": "Administration IA",
+    "subtitle": "Indexation des documents et usage de l'assistant Sckolaris AI",
+    "statusIndexed": "Indexés",
+    "statusPending": "En attente",
+    "statusProcessing": "En cours",
+    "statusFailed": "Échecs",
+    "statusTooLarge": "Trop volumineux",
+    "statusUnsupportedFormat": "Format non pris en charge",
+    "requests30d": "Requêtes IA (30 j)",
+    "avgLatency": "Latence moyenne",
+    "reindex": "Ré-indexer",
+    "index": "Indexer",
+    "indexScheduled": "Indexation programmée.",
+    "documentTitle": "Document",
+    "status": "Statut"
   },
   "home": {
     "hero": {

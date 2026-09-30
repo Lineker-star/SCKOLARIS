@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Ai\Contracts\TextExtractorInterface;
+use App\Services\Ai\PdfTextExtractor;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Seul format pris en charge pour l'instant par l'indexation IA —
+        // voir DocumentRagService, qui marque les autres formats
+        // "unsupported_format" avant même d'atteindre cette classe.
+        $this->app->bind(TextExtractorInterface::class, PdfTextExtractor::class);
     }
 
     /**

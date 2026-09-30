@@ -12,6 +12,7 @@
     "next": "Next",
     "previous": "Previous",
     "search": "Search",
+    "reset": "Reset filter",
     "download": "Download",
     "read": "Read",
     "add": "Add",
@@ -43,6 +44,7 @@
     "myDeposits": "My deposits",
     "domains": "Domains",
     "statistics": "Statistics",
+    "aiAdmin": "AI Administration",
     "users": "Users",
     "pendingAccounts": "Pending accounts",
     "deletionRequests": "Deletion requests",
@@ -622,6 +624,34 @@
     "openAssistant": "Open the SCKOLARIS assistant",
     "loading": "Generating a reply...",
     "error": "The assistant is temporarily unavailable. Please try again shortly."
+  },
+  "askAi": {
+    "buttonLabel": "Ask Sckolaris AI",
+    "title": "Sckolaris AI",
+    "greeting": "Ask me anything about this document: what it's about, a summary, a specific chapter...",
+    "placeholder": "Your question about this document...",
+    "sources": "Sources",
+    "page": "p. {{page}}",
+    "notIndexedYet": "This document isn't ready for the AI assistant yet — try again shortly.",
+    "feedbackPrompt": "Was this answer helpful?",
+    "feedbackThanks": "Thanks for your feedback."
+  },
+  "aiAdmin": {
+    "title": "AI Administration",
+    "subtitle": "Document indexing and Sckolaris AI assistant usage",
+    "statusIndexed": "Indexed",
+    "statusPending": "Pending",
+    "statusProcessing": "Processing",
+    "statusFailed": "Failed",
+    "statusTooLarge": "Too large",
+    "statusUnsupportedFormat": "Unsupported format",
+    "requests30d": "AI requests (30d)",
+    "avgLatency": "Average latency",
+    "reindex": "Re-index",
+    "index": "Index",
+    "indexScheduled": "Indexing scheduled.",
+    "documentTitle": "Document",
+    "status": "Status"
   },
   "home": {
     "hero": {

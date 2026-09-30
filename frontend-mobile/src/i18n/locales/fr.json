@@ -532,6 +532,13 @@
     "loading": "Réponse en cours...",
     "error": "L'assistant est momentanément indisponible. Réessayez dans un instant."
   },
+  "askAi": {
+    "buttonLabel": "Demander à Sckolaris AI",
+    "greeting": "Posez-moi une question sur ce document : de quoi il parle, un résumé, un chapitre précis...",
+    "page": "p. {{page}}",
+    "feedbackPrompt": "Cette réponse vous a-t-elle été utile ?",
+    "feedbackThanks": "Merci pour votre retour."
+  },
   "about": {
     "hero": {
       "title": "L'Excellence Académique à Portée de Main",

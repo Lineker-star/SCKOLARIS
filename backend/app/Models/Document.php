@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AiIndexStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,7 +39,9 @@ class Document extends Model
     protected function casts():array
     {
         return [
-            'uploaded_at' => 'datetime'
+            'uploaded_at' => 'datetime',
+            'ai_index_status' => AiIndexStatus::class,
+            'ai_indexed_at' => 'datetime',
         ];
     }
 
@@ -67,6 +70,11 @@ class Document extends Model
     public function downloads(): HasMany
     {
         return $this->hasMany(Download::class, 'document_id');
+    }
+
+    public function chunks(): HasMany
+    {
+        return $this->hasMany(DocumentChunk::class);
     }
 
     public function isOwnedBy(User $user): bool

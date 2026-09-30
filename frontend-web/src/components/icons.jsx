@@ -494,3 +494,30 @@ export function MinimizeIcon(props) {
     </svg>
   )
 }
+
+export function SparklesIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
+      <path d="M12 8a4 4 0 0 0 4 4 4 4 0 0 0-4 4 4 4 0 0 0-4-4 4 4 0 0 0 4-4Z" />
+    </svg>
+  )
+}
+
+export function ThumbsUpIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M7 10v11H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h3Z" />
+      <path d="M7 10l4.5-6.5a1.5 1.5 0 0 1 2.7 1L13 8h5a2 2 0 0 1 2 2.3l-1.3 8A2 2 0 0 1 16.7 20H10a3 3 0 0 1-3-3v-7Z" />
+    </svg>
+  )
+}
+
+export function ThumbsDownIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M17 14V3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-3Z" />
+      <path d="M17 14l-4.5 6.5a1.5 1.5 0 0 1-2.7-1L11 16H6a2 2 0 0 1-2-2.3l1.3-8A2 2 0 0 1 7.3 4H14a3 3 0 0 1 3 3v7Z" />
+    </svg>
+  )
+}

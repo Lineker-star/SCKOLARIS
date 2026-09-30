@@ -4,10 +4,22 @@ return [
 
     'gemini' => [
         // Assistant chat (ChatController), niveau gratuit — voir aussi
-        // ProjectRagService pour la recherche documentaire qui alimente son
-        // contexte (ne dépend d'aucune clé API).
+        // ProjectRagService pour la recherche documentaire plateforme (ne
+        // dépend d'aucune clé API) et DocumentRagService pour la recherche
+        // sémantique dans le contenu des documents (embeddings, utilise
+        // cette même clé).
         'api_key' => env('GEMINI_API_KEY'),
         'model' => env('GEMINI_MODEL', 'gemini-3.6-flash'),
+        'embedding_model' => env('GEMINI_EMBEDDING_MODEL', 'gemini-embedding-001'),
+    ],
+
+    'ai' => [
+        // Taille maximale (Mo) d'un document indexé pour la recherche
+        // sémantique — au-delà, DocumentRagService marque le document
+        // "too_large" sans tenter l'extraction (protège le worker de queue
+        // contre l'OOM sur les très gros PDF, jusqu'à 500 Mo autorisés à
+        // l'upload).
+        'max_indexable_file_mb' => env('AI_MAX_INDEXABLE_FILE_MB', 100),
     ],
 
     'brevo' => [

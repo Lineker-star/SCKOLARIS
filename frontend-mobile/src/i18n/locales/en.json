@@ -532,6 +532,13 @@
     "loading": "Generating a reply...",
     "error": "The assistant is temporarily unavailable. Please try again shortly."
   },
+  "askAi": {
+    "buttonLabel": "Ask Sckolaris AI",
+    "greeting": "Ask me anything about this document: what it's about, a summary, a specific chapter...",
+    "page": "p. {{page}}",
+    "feedbackPrompt": "Was this answer helpful?",
+    "feedbackThanks": "Thanks for your feedback."
+  },
   "about": {
     "hero": {
       "title": "Academic Excellence at Your Fingertips",

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use App\Enums\AccountStatus;
 use App\Enums\Role;
+use App\Jobs\IndexDocumentForAi;
 use App\Models\User;
 use App\Notifications\CourseAvailableNotification;
 use App\Models\Document;
@@ -43,6 +44,8 @@ class DocumentController extends Controller
         }
 
         $document = Document::create($data);
+
+        IndexDocumentForAi::dispatch($document);
 
         if (($request->user()->isTeacher() || $request->user()->isAdmin()) && filled($document->program)) {
             $document->load('subdomain');
@@ -112,6 +115,10 @@ class DocumentController extends Controller
         }
 
         $document->update($data);
+
+        if ($request->hasFile('file')) {
+            IndexDocumentForAi::dispatch($document);
+        }
 
         return response()->json(['document' => $document->load('subdomain.domain')]);
     }

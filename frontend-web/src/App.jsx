@@ -44,6 +44,7 @@ const Users = lazy(() => import('./pages/Users'))
 const UserDetail = lazy(() => import('./pages/UserDetail'))
 const PendingDeletionRequests = lazy(() => import('./pages/PendingDeletionRequests'))
 const DeletionRequestDetail = lazy(() => import('./pages/DeletionRequestDetail'))
+const AiAdministration = lazy(() => import('./pages/AiAdministration'))
 
 function RouteFallback() {
   return (
@@ -229,6 +230,14 @@ export default function App() {
               element={
                 <RequireAuth roles={['admin']}>
                   <PendingDeletionRequests />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/administration-ia"
+              element={
+                <RequireAuth roles={['admin']}>
+                  <AiAdministration />
                 </RequireAuth>
               }
             />

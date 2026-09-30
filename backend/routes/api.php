@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AiAdministrationController;
+use App\Http\Controllers\AiConversationController;
+use App\Http\Controllers\AiFeedbackController;
 use App\Http\Controllers\AppReleaseController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ChatController;
@@ -141,5 +144,21 @@ Route::middleware(['auth:sanctum', 'active', 'track.activity'])->group(function 
     // Statistiques détaillées (courbes, calculées en R) — voir StatsController
     Route::get('analytics', [StatsController::class, 'index'])
         ->middleware('role:admin');
+
+    // Historique des conversations IA (Sckolaris AI) — réservé aux comptes
+    // authentifiés, propriété vérifiée en contrôleur.
+    Route::middleware('throttle:30,1')->group(function () {
+        Route::get('ai/conversations', [AiConversationController::class, 'index']);
+        Route::get('ai/conversations/{conversation}', [AiConversationController::class, 'show']);
+        Route::delete('ai/conversations/{conversation}', [AiConversationController::class, 'destroy']);
+        Route::post('ai/feedback', [AiFeedbackController::class, 'store']);
+    });
+
+    // Administration de l'IA (indexation, usage) — voir DocumentRagService
+    Route::middleware('role:admin')->group(function () {
+        Route::get('admin/ai/documents', [AiAdministrationController::class, 'documents']);
+        Route::post('admin/ai/documents/{document}/index', [AiAdministrationController::class, 'index']);
+        Route::get('admin/ai/usage', [AiAdministrationController::class, 'usage']);
+    });
 
 });

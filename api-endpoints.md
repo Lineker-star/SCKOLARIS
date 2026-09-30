@@ -97,21 +97,62 @@ Accessibles à tout compte authentifié, **y compris `pending`** (section 7 du b
 |---|---|---|---|---|
 | GET | `/api/statistics` | oui | admin | `AccountController@statistics` |
 
-## Assistant Gemini
+## Assistant Sckolaris AI
 
-`POST /api/chat` reçoit une question, l'enrichit d'un contexte documentaire retrouvé par recherche lexicale dans les fichiers du projet (voir `ProjectRagService`), puis transmet une version limitée par rôle à Gemini via l'API HTTPS Google (niveau gratuit). La clé Gemini reste uniquement sur le backend; elle n'est jamais exposée au navigateur.
+`POST /api/chat` reçoit une question et la route de façon déterministe
+(`IntentRouter`, sans appel LLM) vers l'une de trois sources de contexte,
+puis transmet une version limitée par rôle à Gemini via l'API HTTPS Google
+(niveau gratuit). La clé Gemini reste uniquement sur le backend; elle n'est
+jamais exposée au navigateur.
+
+| Intention | Déclenchée par | Source du contexte |
+|---|---|---|
+| `book_question` | `document_id` fourni | Contenu du document (recherche sémantique dans ses chunks, `DocumentRagService`) — **compte authentifié requis** |
+| `catalog_search_or_recommend` | mots-clés type « trouve/recommande/livre/problème/objectif » | Recherche sémantique dans tous les documents indexés |
+| `platform_help` | tout le reste (comportement par défaut, inchangé) | Documentation/code du projet (`ProjectRagService`, recherche lexicale) |
 
 ```json
 { "message": "Comment déposer un support de cours ?", "language": "fr" }
 ```
 
-Réponse :
-
 ```json
-{ "message": "Après validation de votre compte enseignant, ouvrez..." }
+{ "message": "De quoi parle ce document ?", "language": "fr", "document_id": 42 }
 ```
 
-Le contexte envoyé dépend du rôle résolu côté serveur (`guest`, `student`, `teacher`, `admin`). Les fonctions d'administration ne sont donc pas décrites au chatbot d'un étudiant ou d'un enseignant.
+Réponse (avec citations si le contexte provient de documents) :
+
+```json
+{
+  "message": "Selon les ressources Sckolaris, ce document traite de...",
+  "conversation_id": 7,
+  "message_id": 15,
+  "citations": [{ "document_id": 42, "title": "Réseaux informatiques", "page_number": 245 }]
+}
+```
+
+Le contexte envoyé dépend du rôle résolu côté serveur (`guest`, `student`, `teacher`, `admin`). Les fonctions d'administration ne sont donc pas décrites au chatbot d'un étudiant ou d'un enseignant. Pour un compte authentifié, la conversation (questions + réponses + citations) est automatiquement enregistrée — voir ci-dessous. Un invité obtient une réponse identique mais rien n'est conservé.
+
+### Historique des conversations (compte authentifié)
+
+| Méthode | Route | Auth | Contrôleur |
+|---|---|---|---|
+| GET | `/api/ai/conversations` | oui | `AiConversationController@index` |
+| GET | `/api/ai/conversations/{conversation}` | oui (propriétaire) | `AiConversationController@show` |
+| DELETE | `/api/ai/conversations/{conversation}` | oui (propriétaire) | `AiConversationController@destroy` |
+| POST | `/api/ai/feedback` | oui (propriétaire du message) | `AiFeedbackController@store` |
+
+```json
+// POST /api/ai/feedback
+{ "message_id": 15, "rating": "up" }
+```
+
+### Administration de l'IA (admin)
+
+| Méthode | Route | Contrôleur |
+|---|---|---|
+| GET | `/api/admin/ai/documents` | `AiAdministrationController@documents` — liste paginée + compteurs par statut d'indexation |
+| POST | `/api/admin/ai/documents/{document}/index` | `AiAdministrationController@index` — déclenche `IndexDocumentForAi` (409 si déjà indexé, sauf `?force=1`) |
+| GET | `/api/admin/ai/usage` | `AiAdministrationController@usage` — agrégats sur 30 jours (requêtes, tokens, latence) |
 
 ---
 

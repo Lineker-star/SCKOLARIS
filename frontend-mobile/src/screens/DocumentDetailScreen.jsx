@@ -74,7 +74,7 @@ export default function DocumentDetailScreen() {
     setError('')
     try {
       const uri = offline ? offline.localUri : await readDocumentToFile(id, filenameFor(doc))
-      navigation.navigate('DocumentReader', { uri, title: doc?.title })
+      navigation.navigate('DocumentReader', { uri, title: doc?.title, documentId: id })
     } catch (err) {
       console.error('[handleRead] échec :', err)
       setError(t('documentDetail.readError'))

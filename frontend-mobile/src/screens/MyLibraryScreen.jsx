@@ -91,7 +91,7 @@ export default function MyLibraryScreen() {
               <View className="flex-row items-center gap-3">
                 <Pressable
                   onPress={() =>
-                    navigation.navigate('DocumentReader', { uri: doc.localUri, title: doc.title })
+                    navigation.navigate('DocumentReader', { uri: doc.localUri, title: doc.title, documentId: doc.documentId })
                   }
                   className="flex-row items-center gap-1.5 rounded border border-outline dark:border-outline-night px-3 py-1.5"
                 >
