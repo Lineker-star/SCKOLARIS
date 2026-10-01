@@ -110,7 +110,11 @@ Sans planificateur actif, le statut "en ligne" reste bloqué sur `true` indéfin
   (`--stop-when-empty` : le worker s'arrête dès que la file est vide plutôt que de tourner indéfiniment entre deux déclenchements cron ; `--max-time=240` : filet de sécurité qui l'arrête après 4 minutes même en cas de job bloqué, avant le prochain déclenchement.)
 - Variables d'environnement : copier celles du service backend, comme pour le planificateur — `GEMINI_API_KEY`/`GEMINI_EMBEDDING_MODEL` sont indispensables ici (le job en a besoin pour calculer les embeddings).
 
-Un seul et même service Railway peut cumuler les deux commandes (planificateur + queue) en les combinant dans un script, mais garder deux services séparés (un par commande) reste plus simple à diagnostiquer en cas de panne — c'est l'approche documentée ici.
+**Alternative : un seul service pour les deux commandes.** Garder deux services séparés (un par commande) reste plus simple à diagnostiquer en cas de panne (logs isolés par tâche) — c'est l'approche recommandée ci-dessus. Mais un seul service Railway peut cumuler les deux, via `backend/docker/run-cron-and-queue.sh` (déjà présent dans le repo) :
+- **Custom Start Command** : `sh docker/run-cron-and-queue.sh`
+- **Pourquoi pas directement `cmd1 && cmd2` dans le champ Railway** : ce champ est transmis tel quel à `docker/entrypoint.sh`, qui l'exécute via `exec "$@"` — **sans shell** intermédiaire. `&&` n'y serait jamais interprété comme un opérateur, seulement comme un argument littéral passé au premier programme, qui échouerait aussitôt. Faire précéder le script de `sh` contourne complètement le problème : `entrypoint.sh` reçoit alors deux arguments (`sh` et le chemin du script), exécute `sh` avec ce script en argument, et c'est **ce** `sh`-là qui interprète correctement le `&&` à l'intérieur du fichier.
+- Un seul **Cron Schedule** pour les deux tâches (`*/5 * * * *` convient aux deux).
+- Le script s'arrête à la première commande en échec (`set -e`) plutôt que de lancer la seconde en silence si la première casse.
 
 ### Sauvegarde
 - Base PostgreSQL : dump quotidien minimum (`pg_dump`), conservé **hors** du serveur applicatif.
