@@ -27,12 +27,16 @@ export default function Navbar() {
 
   return (
     <header className="bg-surface border-b border-outline-variant relative">
-      <div className="max-w-(--container-max-width) mx-auto flex items-center justify-between gap-6 px-4 py-4 md:px-8">
-        <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => setOpen(false)}>
-          <Logo size={32} />
-          <span className="flex flex-col min-w-0">
-            <span className="text-xl font-bold text-primary leading-tight">{BRAND_NAME}</span>
-            <span className="text-[10px] text-on-surface-variant leading-tight whitespace-nowrap">{BRAND_TAGLINE}</span>
+      <div className="max-w-(--container-max-width) mx-auto flex items-center justify-between gap-3 px-4 py-4 md:gap-6 md:px-8">
+        <Link to="/" className="flex min-w-0 items-center gap-2" onClick={() => setOpen(false)}>
+          <Logo size={32} className="shrink-0" />
+          <span className="flex min-w-0 flex-col">
+            <span className="truncate text-xl font-bold text-primary leading-tight">{BRAND_NAME}</span>
+            {/* Caché sous sm: le slogan n'est pas essentiel à la navigation et,
+                avec shrink-0 sur les deux blocs de part et d'autre, forçait
+                le bouton burger hors du viewport (invisible, caché par
+                overflow-x-hidden) sur les écrans de téléphone en portrait. */}
+            <span className="hidden text-[10px] text-on-surface-variant leading-tight whitespace-nowrap sm:block">{BRAND_TAGLINE}</span>
           </span>
         </Link>
 
