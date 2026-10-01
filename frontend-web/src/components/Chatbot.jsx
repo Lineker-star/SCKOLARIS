@@ -45,9 +45,9 @@ export default function Chatbot() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end">
+    <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-[calc(1rem+env(safe-area-inset-right))] z-40 flex flex-col items-end">
       {open && (
-        <div className="mb-3 flex h-[28rem] w-[calc(100vw-2rem)] max-w-[calc(100vw-1rem)] flex-col overflow-hidden rounded-lg border border-outline-variant bg-surface-container-lowest shadow-xl">
+        <div className="mb-3 flex h-[min(28rem,70vh)] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-lg border border-outline-variant bg-surface-container-lowest shadow-xl">
           <div className="flex items-center justify-between border-b border-outline-variant bg-primary px-4 py-3">
             <p className="text-sm font-semibold text-on-primary">{t('chatbot.title')}</p>
             <button onClick={() => setOpen(false)} aria-label={t('common.close')} className="text-on-primary">

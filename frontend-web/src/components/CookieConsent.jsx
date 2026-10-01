@@ -27,7 +27,11 @@ export default function CookieConsent() {
   if (!visible) return null
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-outline-variant bg-surface-container-lowest p-4 shadow-lg sm:bottom-4 sm:left-4 sm:right-auto sm:max-w-sm sm:rounded-lg sm:border">
+    // left-4 + right-20 (jamais inset-x-0 plein écran) : laisse toujours un
+    // couloir libre à droite pour les boutons flottants WhatsApp/assistant
+    // (Chatbot.jsx, ancrés bottom-right) — sinon ce bandeau, en z-50, les
+    // recouvre entièrement sur mobile tant qu'il n'est pas fermé.
+    <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-4 right-20 z-50 rounded-lg border border-outline-variant bg-surface-container-lowest p-4 shadow-lg sm:right-auto sm:max-w-sm">
       <p className="text-sm text-on-surface">
         <Trans
           i18nKey="cookieConsent.text"

@@ -46,7 +46,7 @@ export default function AskAiPanel({ documentId, documentTitle, onClose }) {
 
   return (
     <Modal title={documentTitle ? `${t('askAi.title')} — ${documentTitle}` : t('askAi.title')} icon={<SparklesIcon width={20} height={20} />} onClose={onClose}>
-      <div className="flex h-[26rem] flex-col">
+      <div className="flex h-[min(26rem,65vh)] flex-col">
         <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto pb-3">
           {messages.map((m, i) => (
             <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
