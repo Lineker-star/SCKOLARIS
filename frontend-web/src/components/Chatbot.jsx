@@ -37,8 +37,11 @@ export default function Chatbot() {
         language: i18n.language.startsWith('en') ? 'en' : 'fr',
       })
       setMessages((prev) => [...prev, { role: 'bot', text: data.message }])
-    } catch {
-      setMessages((prev) => [...prev, { role: 'bot', text: t('chatbot.error') }])
+    } catch (err) {
+      const serverMessage = err.response?.data?.message
+      const text = serverMessage
+        ?? (err.response ? t('chatbot.error') : 'Impossible de joindre le serveur SCKOLARIS pour le moment.')
+      setMessages((prev) => [...prev, { role: 'bot', text }])
     } finally {
       setSending(false)
     }

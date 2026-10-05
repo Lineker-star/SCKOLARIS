@@ -83,7 +83,12 @@ api.interceptors.response.use(
       return Promise.reject(error)
     }
 
-    if (!navigator.onLine || !error.response || ['ERR_NETWORK', 'ECONNABORTED', 'ERR_INTERNET_DISCONNECTED'].includes(error.code)) {
+    // Seules les vraies coupures (hors ligne) ou les délais dépassés sont
+    // signalées comme "connexion instable". Une absence de réponse alors que
+    // le navigateur est en ligne peut venir d'un blocage CORS ou d'un serveur
+    // injoignable — ce n'est pas un problème de connexion de l'utilisateur,
+    // et l'écran appelant affiche déjà son propre message d'erreur.
+    if (!navigator.onLine || error.code === 'ECONNABORTED') {
       emitNetworkStatus('unstable', actionForRequest(error.config))
     }
 

@@ -34,14 +34,20 @@ export default function Login() {
         navigate('/tableau-de-bord')
       }
     } catch (err) {
-      const isConnectionIssue = !navigator.onLine || !err.response || ['ERR_NETWORK', 'ECONNABORTED', 'ERR_INTERNET_DISCONNECTED'].includes(err.code)
       if (err.response?.status === 409) {
         setError(err.response.data.message || err.response.data.errors?.device_id?.[0] || 'Ce compte est déjà utilisé sur deux appareils. Déconnectez un appareil avant de continuer.')
       } else if (err.response?.status === 403) {
         setError(err.response.data.message || t('login.accessDenied'))
-      } else if (isConnectionIssue) {
-        window.dispatchEvent(new CustomEvent('network-status', { detail: { status: 'unstable' } }))
-        setError('Connexion instable. Veuillez patienter quelques secondes, puis réessayez.')
+      } else if (!err.response) {
+        if (!navigator.onLine) {
+          setError('Vous semblez hors connexion. Vérifiez votre connexion internet puis réessayez.')
+        } else if (err.code === 'ECONNABORTED') {
+          setError('La connexion est lente et le délai a été dépassé. Veuillez réessayer.')
+        } else {
+          setError('Impossible de joindre le serveur SCKOLARIS pour le moment. Réessayez dans un instant ; si le problème persiste, signalez-le à l’administration.')
+        }
+      } else if (err.response.status >= 500) {
+        setError('Le serveur rencontre un problème temporaire. Réessayez dans quelques minutes.')
       } else {
         setError(t('login.invalidCredentials'))
       }
