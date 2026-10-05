@@ -285,23 +285,34 @@ PROMPT;
     private function callGemini(string $prompt, string $model, string $apiKey): array
     {
         try {
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-                'x-goog-api-key' => $apiKey,
-            ])->timeout(30)->post(
-                'https://generativelanguage.googleapis.com/v1beta/models/'
-                    .$model.':generateContent',
-                [
-                    'contents' => [[
-                        'role' => 'user',
-                        'parts' => [['text' => $prompt]],
-                    ]],
-                    'generationConfig' => [
-                        'temperature' => 0.2,
-                        'maxOutputTokens' => 1024,
+            // Gemini renvoie 503 (surcharge) ou 429 (quota par minute) de façon
+            // passagère : on réessaie brièvement avant d'abandonner.
+            $attempt = 0;
+            do {
+                $response = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                    'x-goog-api-key' => $apiKey,
+                ])->timeout(30)->post(
+                    'https://generativelanguage.googleapis.com/v1beta/models/'
+                        .$model.':generateContent',
+                    [
+                        'contents' => [[
+                            'role' => 'user',
+                            'parts' => [['text' => $prompt]],
+                        ]],
+                        'generationConfig' => [
+                            'temperature' => 0.2,
+                            'maxOutputTokens' => 1024,
+                        ],
                     ],
-                ],
-            );
+                );
+
+                $retryable = in_array($response->status(), [429, 503], true);
+                if ($retryable && $attempt < 2) {
+                    usleep(1_000_000 * ($attempt + 1));
+                }
+                $attempt++;
+            } while ($retryable && $attempt < 3);
         } catch (ConnectionException $exception) {
             Log::error('Gemini connection failed', [
                 'model' => $model,
