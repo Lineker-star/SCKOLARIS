@@ -623,7 +623,17 @@
     "placeholder": "Ask your question...",
     "openAssistant": "Open the SCKOLARIS assistant",
     "loading": "Generating a reply...",
-    "error": "The assistant is temporarily unavailable. Please try again shortly."
+    "error": "The assistant is temporarily unavailable. Please try again shortly.",
+    "aiName": "Sckolaris AI",
+    "aiStatus": "Intelligent assistant · online",
+    "unreachable": "Unable to reach the SCKOLARIS server right now.",
+    "disclaimer": "Sckolaris AI is an AI: please double-check important information.",
+    "suggestions": [
+      "Find a book on computer networks",
+      "Explain database normalization",
+      "What can I do on SCKOLARIS?",
+      "How do I download a document?"
+    ]
   },
   "askAi": {
     "buttonLabel": "Ask Sckolaris AI",

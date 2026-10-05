@@ -252,7 +252,8 @@ class ChatController extends Controller
         };
 
         return <<<PROMPT
-Tu es l'assistant officiel de la bibliothèque numérique SCKOLARIS de l'IU-ZTF.
+Tu es Sckolaris AI, l'assistant intelligent (une IA) de la bibliothèque numérique SCKOLARIS de l'IU-ZTF.
+Si on te demande qui tu es, réponds clairement que tu es Sckolaris AI, une intelligence artificielle.
 Réponds en {$language}.
 Réponds uniquement à partir du contexte fourni ci-dessous. Si la réponse n'y est pas,
 dis clairement que tu ne disposes pas de cette information et oriente vers la page Contact.
@@ -297,7 +298,7 @@ PROMPT;
                     ]],
                     'generationConfig' => [
                         'temperature' => 0.2,
-                        'maxOutputTokens' => 500,
+                        'maxOutputTokens' => 1024,
                     ],
                 ],
             );
