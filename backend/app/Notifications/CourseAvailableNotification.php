@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Support\EmailBranding;
+
 use App\Notifications\Channels\BrevoChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -39,13 +41,10 @@ class CourseAvailableNotification extends Notification
     {
         $data = $this->toDatabase();
         $url = config('services.frontend.url').$data['url'];
-
-        $logoUrl = config('services.frontend.url').'/logo-email.png';
-
         return [
             'subject' => 'SCKOLARIS — Nouveau support disponible dans votre filière',
             'html' => '<!doctype html><html lang="fr"><body style="font-family:Arial,sans-serif;color:#1a1a1a;line-height:1.6">'
-                .'<div style="text-align:center;margin-bottom:20px"><img src="'.e($logoUrl).'" alt="SCKOLARIS" style="width:88px;height:88px;border-radius:18px;display:inline-block" /></div>'
+                .EmailBranding::logoHtml()
                 .'<h2>SCKOLARIS Universite ZTF</h2><p>Bonjour '.e($notifiable->first_name).',</p>'
                 .'<p>Un nouveau support de cours est disponible dans votre domaine d’étude et votre filière.</p>'
                 .'<p><strong>Titre :</strong> '.e($data['title']).'<br>'

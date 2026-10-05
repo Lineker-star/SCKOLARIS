@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Support\EmailBranding;
+
 use App\Notifications\Channels\BrevoChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -45,13 +47,10 @@ class DeletionRequestDecisionNotification extends Notification
         $message = $approved
             ? 'Votre support a été retiré définitivement du catalogue.'
             : 'Votre support reste disponible dans le catalogue.';
-
-        $logoUrl = config('services.frontend.url').'/logo-email.png';
-
         return [
             'subject' => 'SCKOLARIS — Demande de suppression '.$decisionLabel,
             'html' => '<!doctype html><html lang="fr"><body style="font-family:Arial,sans-serif;color:#1a1a1a;line-height:1.6">'
-                .'<div style="text-align:center;margin-bottom:20px"><img src="'.e($logoUrl).'" alt="SCKOLARIS" style="width:88px;height:88px;border-radius:18px;display:inline-block" /></div>'
+                .EmailBranding::logoHtml()
                 .'<h2>SCKOLARIS Universite ZTF</h2><p>Bonjour '.e($notifiable->first_name).',</p>'
                 .'<p>Votre demande de suppression concernant le support <strong>'.e($this->documentTitle).'</strong> a été <strong>'.e($decisionLabel).'</strong> par un administrateur.</p>'
                 .'<p>'.e($message).'</p>'

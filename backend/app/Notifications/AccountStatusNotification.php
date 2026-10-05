@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Support\EmailBranding;
+
 use App\Enums\Role;
 use App\Notifications\Channels\BrevoChannel;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -122,11 +124,8 @@ class AccountStatusNotification extends Notification
 
     public function toBrevo(mixed $notifiable): array
     {
-        $content = $this->contentFor($notifiable);
-
-        $logoUrl = config('services.frontend.url').'/logo-email.png';
-        $html = '<!doctype html><html lang="fr"><body style="font-family:Arial,sans-serif;color:#1a1a1a;line-height:1.6">'
-            .'<div style="text-align:center;margin-bottom:20px"><img src="'.e($logoUrl).'" alt="SCKOLARIS" style="width:88px;height:88px;border-radius:18px;display:inline-block" /></div>'
+        $content = $this->contentFor($notifiable);        $html = '<!doctype html><html lang="fr"><body style="font-family:Arial,sans-serif;color:#1a1a1a;line-height:1.6">'
+            .EmailBranding::logoHtml()
             .'<h2>SCKOLARIS Universite ZTF</h2><p>Bonjour '.e($notifiable->first_name).',</p>';
         foreach ($content['lines'] as $line) {
             $html .= '<p>'.e($line).'</p>';

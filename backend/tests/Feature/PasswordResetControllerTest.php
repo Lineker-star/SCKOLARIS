@@ -43,10 +43,10 @@ class PasswordResetControllerTest extends TestCase
         $this->postJson('/api/forgot-password', ['email' => 'awa@example.com']);
 
         Notification::assertSentTo($user, function (ResetPasswordNotification $notification) use ($user) {
-            $url = $notification->toMail($user)->actionUrl;
+            $html = $notification->toBrevo($user)['html'];
 
-            return str_starts_with($url, config('services.frontend.url').'/reinitialiser-mot-de-passe?token=')
-                && str_contains($url, 'email=awa%40example.com');
+            return str_contains($html, config('services.frontend.url').'/reinitialiser-mot-de-passe?token=')
+                && str_contains($html, 'email=awa%40example.com');
         });
     }
 

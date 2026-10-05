@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import Navbar from './Navbar'
+import Footer from './Footer'
 
 export default function LegalPage({ title, updatedAt, children }) {
   const { t } = useTranslation()
@@ -17,6 +18,8 @@ export default function LegalPage({ title, updatedAt, children }) {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import LibraryArt from '../components/LibraryArt'
 import { SearchIcon, BookOpenIcon, DownloadIcon } from '../components/icons'
 
@@ -56,6 +57,8 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   )
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\EmailBranding;
+
 use App\Http\Requests\StoreContactMessageRequest;
 use App\Support\BrevoMailer;
 use Illuminate\Http\JsonResponse;
@@ -27,6 +29,7 @@ class ContactController extends Controller
             ],
             subject: 'SCKOLARIS — '.$topic,
             htmlContent: '<!doctype html><html lang="fr"><body style="font-family:Arial,sans-serif;color:#1a1a1a">'
+                .EmailBranding::logoHtml()
                 .'<h2>Nouveau message — formulaire de contact SCKOLARIS</h2>'
                 .'<p><strong>Nom :</strong> '.e($name).'</p>'
                 .'<p><strong>E-mail :</strong> '.e($senderEmail).'</p>'

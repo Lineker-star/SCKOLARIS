@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import LibraryArt from '../components/LibraryArt'
 import { BuildingIcon, BookOpenIcon, BadgeCheckIcon, UsersIcon } from '../components/icons'
 
@@ -58,6 +59,8 @@ export default function About() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   )
 }

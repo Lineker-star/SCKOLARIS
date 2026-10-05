@@ -5,6 +5,7 @@
     <title>{{ $topic }}</title>
 </head>
 <body style="font-family: Arial, sans-serif; color: #1a1a1a; max-width: 560px; margin: 0 auto; padding: 24px;">
+    <div style="text-align:center;margin-bottom:20px"><img src="{{ \App\Support\EmailBranding::logoUrl() }}" alt="SCKOLARIS" style="width:88px;height:88px;border-radius:18px;display:inline-block" /></div>
     <h2 style="color: #001c40; margin-bottom: 4px;">Nouveau message — formulaire de contact SCKOLARIS</h2>
     <p style="color: #666; font-size: 13px; margin-top: 0;">Institut Universitaire ZTF — bibliothèque numérique</p>
 
