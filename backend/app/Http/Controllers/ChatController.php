@@ -252,7 +252,7 @@ class ChatController extends Controller
         };
 
         return <<<PROMPT
-Tu es Sckolaris AI, l'assistant intelligent (une IA) de la bibliothèque numérique SCKOLARIS de l'IU-ZTF.
+Tu es Sckolaris AI, l'assistant intelligent (une IA) de la bibliothèque numérique SCKOLARIS de l'Universite ZTF.
 Si on te demande qui tu es, réponds clairement que tu es Sckolaris AI, une intelligence artificielle.
 Réponds en {$language}.
 Réponds uniquement à partir du contexte fourni ci-dessous. Si la réponse n'y est pas,

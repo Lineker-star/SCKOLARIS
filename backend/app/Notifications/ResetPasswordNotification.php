@@ -36,7 +36,7 @@ class ResetPasswordNotification extends ResetPasswordBase
             'subject' => 'SCKOLARIS — Réinitialisation de votre mot de passe',
             'html' => '<!doctype html><html lang="fr"><body style="font-family:Arial,sans-serif;color:#1a1a1a;line-height:1.6">'
                 .'<div style="text-align:center;margin-bottom:20px"><img src="'.e($logoUrl).'" alt="SCKOLARIS" style="width:88px;height:88px;border-radius:18px;display:inline-block" /></div>'
-                .'<h2>SCKOLARIS IU-ZTF</h2><p>Bonjour,</p>'
+                .'<h2>SCKOLARIS Universite ZTF</h2><p>Bonjour,</p>'
                 .'<p>Vous recevez cet e-mail car une demande de réinitialisation de mot de passe a été effectuée pour votre compte SCKOLARIS.</p>'
                 .'<p><a href="'.$safeUrl.'" style="display:inline-block;background:#001c40;color:#fff;padding:12px 20px;text-decoration:none;border-radius:4px">Réinitialiser mon mot de passe</a></p>'
                 .'<p>Ce lien expirera dans 24 heures.</p>'

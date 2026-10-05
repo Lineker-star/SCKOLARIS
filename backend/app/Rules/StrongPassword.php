@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 /**
- * Politique de mot de passe réglementaire de l'IU-ZTF : au moins 4 lettres,
+ * Politique de mot de passe réglementaire de l'Universite ZTF : au moins 4 lettres,
  * 3 chiffres et 1 symbole — l'ordre n'a pas d'importance. 4+3+1 = 8, donc la
  * longueur minimale de 8 caractères est déjà garantie par ces trois
  * contraintes réunies ; on la vérifie quand même explicitement en premier

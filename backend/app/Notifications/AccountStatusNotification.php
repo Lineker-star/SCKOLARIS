@@ -55,8 +55,8 @@ class AccountStatusNotification extends Notification
             'validated' => [
                 'subject' => 'SCKOLARIS — Votre compte a été validé',
                 'lines' => [
-                    "Bonne nouvelle : votre compte {$roleLabel} SCKOLARIS a été validé par un administrateur de l'IU-ZTF.",
-                    'Bienvenue dans la bibliothèque numérique de l\'IU-ZTF ! Nous sommes heureux de vous compter parmi notre communauté.',
+                    "Bonne nouvelle : votre compte {$roleLabel} SCKOLARIS a été validé par un administrateur de l'Universite ZTF.",
+                    'Bienvenue dans la bibliothèque numérique de l\'Universite ZTF ! Nous sommes heureux de vous compter parmi notre communauté.',
                     $isTeacher
                         ? 'Vous avez maintenant accès aux téléchargements et au dépôt de vos supports de cours.'
                         : 'Vous avez maintenant accès aux téléchargements et à votre bibliothèque personnelle.',
@@ -127,7 +127,7 @@ class AccountStatusNotification extends Notification
         $logoUrl = config('services.frontend.url').'/logo-email.png';
         $html = '<!doctype html><html lang="fr"><body style="font-family:Arial,sans-serif;color:#1a1a1a;line-height:1.6">'
             .'<div style="text-align:center;margin-bottom:20px"><img src="'.e($logoUrl).'" alt="SCKOLARIS" style="width:88px;height:88px;border-radius:18px;display:inline-block" /></div>'
-            .'<h2>SCKOLARIS IU-ZTF</h2><p>Bonjour '.e($notifiable->first_name).',</p>';
+            .'<h2>SCKOLARIS Universite ZTF</h2><p>Bonjour '.e($notifiable->first_name).',</p>';
         foreach ($content['lines'] as $line) {
             $html .= '<p>'.e($line).'</p>';
         }

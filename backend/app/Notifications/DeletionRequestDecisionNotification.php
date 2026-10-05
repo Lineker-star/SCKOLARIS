@@ -52,7 +52,7 @@ class DeletionRequestDecisionNotification extends Notification
             'subject' => 'SCKOLARIS — Demande de suppression '.$decisionLabel,
             'html' => '<!doctype html><html lang="fr"><body style="font-family:Arial,sans-serif;color:#1a1a1a;line-height:1.6">'
                 .'<div style="text-align:center;margin-bottom:20px"><img src="'.e($logoUrl).'" alt="SCKOLARIS" style="width:88px;height:88px;border-radius:18px;display:inline-block" /></div>'
-                .'<h2>SCKOLARIS IU-ZTF</h2><p>Bonjour '.e($notifiable->first_name).',</p>'
+                .'<h2>SCKOLARIS Universite ZTF</h2><p>Bonjour '.e($notifiable->first_name).',</p>'
                 .'<p>Votre demande de suppression concernant le support <strong>'.e($this->documentTitle).'</strong> a été <strong>'.e($decisionLabel).'</strong> par un administrateur.</p>'
                 .'<p>'.e($message).'</p>'
                 .'<p><a href="'.e(config('services.frontend.url').'/mes-depots').'" style="display:inline-block;background:#001c40;color:#fff;padding:12px 20px;text-decoration:none;border-radius:4px">Voir mes dépôts</a></p>'

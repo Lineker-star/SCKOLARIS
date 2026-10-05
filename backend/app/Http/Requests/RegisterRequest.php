@@ -45,14 +45,14 @@ class RegisterRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:50'],
             'first_name' => ['required', 'string', 'max:50'],
             'role' => ['required', Rule::in(['student', 'teacher'])],
-            // Format réglementaire IU-ZTF : 2 chiffres (année d'inscription)
+            // Format réglementaire Universite ZTF : 2 chiffres (année d'inscription)
             // + 3 lettres (code filière, ex: SWE) + 3 chiffres (numéro
             // séquentiel) — ex: 26SWE001. La filière n'est pas limitée à une
             // liste fermée ici (l'institut peut en ouvrir de nouvelles sans
             // que le code ait besoin d'être mis à jour), seule la forme est
             // vérifiée.
             // Obligatoire pour un étudiant ; facultatif pour un enseignant
-            // (l'IU-ZTF n'attribue pas systématiquement de matricule
+            // (l'Universite ZTF n'attribue pas systématiquement de matricule
             // "étudiant" à son personnel enseignant) — mais toujours vérifié
             // dans sa forme et son unicité s'il est quand même fourni.
             'registration_number' => [
@@ -77,7 +77,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'registration_number.required' => 'Le matricule est obligatoire pour une inscription étudiante.',
-            'registration_number.regex' => "Le matricule doit suivre le format réglementaire de l'IU-ZTF : 2 chiffres (année) + 3 lettres (filière) + 3 chiffres (numéro), ex: 26SWE001.",
+            'registration_number.regex' => "Le matricule doit suivre le format réglementaire de l'Universite ZTF : 2 chiffres (année) + 3 lettres (filière) + 3 chiffres (numéro), ex: 26SWE001.",
         ];
     }
 }
