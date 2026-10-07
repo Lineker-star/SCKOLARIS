@@ -1,3 +1,14 @@
+{
+	# API d'administration Caddy (port 2019) inutile ici : la config est
+	# statique, jamais rechargée à chaud. Elle vérifie le Host des requêtes
+	# qui l'atteignent et rejette tout ce qui ne correspond pas exactement
+	# à "localhost" par défaut — sur Render, ça produisait des 403 "host
+	# not allowed" (logger admin.api) même si le site derrière php_server
+	# répondait correctement. La désactiver supprime toute cette classe de
+	# problème (et c'est la pratique recommandée en conteneur de toute façon).
+	admin off
+}
+
 :{$PORT:80} {
 	root * /app/public
 	encode zstd gzip
