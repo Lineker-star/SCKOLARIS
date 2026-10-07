@@ -4,9 +4,10 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import TextField from '../components/TextField'
 import { MapPinIcon, PhoneIcon, MailIcon, ClockIcon, SendIcon, CheckIcon } from '../components/icons'
-import { BRAND_NAME, CONTACT_EMAIL, CONTACT_PHONES } from '../config/brand'
+import { CONTACT_EMAIL, CONTACT_PHONES } from '../config/brand'
+import { sendContactMessage } from '../services/contact'
 
-const initialForm = { name: '', email: '', subject: '', message: '' }
+const initialForm = { name: '', email: '', subject: '', message: '', website: '' }
 
 export default function Contact() {
   const { t } = useTranslation()
@@ -25,28 +26,14 @@ export default function Contact() {
     e.preventDefault()
     setStatus('sending')
 
-    const payload = new FormData()
-    payload.append('Nom_complet', form.name)
-    payload.append('Adresse_email', form.email)
-    payload.append('Sujet', form.subject)
-    payload.append('Message', form.message)
-    payload.append('Origine', `Formulaire de contact — ${BRAND_NAME}`)
-    payload.append('_subject', `${BRAND_NAME} — Nouveau message : ${form.subject}`)
-    payload.append('_template', 'table')
-    payload.append('_captcha', 'false')
-    payload.append(
-      '_autoresponse',
-      `Bonjour,\n\nNous avons bien reçu votre message et vous répondrons dans les plus brefs délais.\n\nL'équipe ${BRAND_NAME}`,
-    )
-    payload.append('_honey', '')
-
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: payload,
+      await sendContactMessage({
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+        website: form.website,
       })
-      if (!res.ok) throw new Error('request failed')
       setStatus('sent')
       setForm(initialForm)
     } catch {
@@ -151,6 +138,17 @@ export default function Contact() {
                 </div>
               ) : (
                 <>
+                  <input
+                    type="text"
+                    name="website"
+                    value={form.website}
+                    onChange={update('website')}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                  />
+
                   <div className="grid sm:grid-cols-2 gap-5">
                     <TextField
                       label={t('contact.fields.name')}

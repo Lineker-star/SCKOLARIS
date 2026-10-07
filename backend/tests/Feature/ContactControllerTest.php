@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Mail\ContactMessage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class ContactControllerTest extends TestCase
@@ -13,7 +12,7 @@ class ContactControllerTest extends TestCase
 
     public function test_a_visitor_can_send_a_contact_message(): void
     {
-        Mail::fake();
+        Http::fake(['api.brevo.com/*' => Http::response(['messageId' => 'fake'], 201)]);
 
         $response = $this->postJson('/api/contact', [
             'name' => 'Awa Fotso',
@@ -23,24 +22,25 @@ class ContactControllerTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-        Mail::assertSent(ContactMessage::class, fn (ContactMessage $mail) => $mail->senderEmail === 'awa@example.com'
-            && $mail->hasTo(config('services.contact.address')));
+        Http::assertSent(fn ($request) => $request->url() === 'https://api.brevo.com/v3/smtp/email'
+            && $request['replyTo']['email'] === 'awa@example.com'
+            && $request['to'][0]['email'] === config('services.contact.address'));
     }
 
     public function test_contact_message_requires_all_fields(): void
     {
-        Mail::fake();
+        Http::fake();
 
         $response = $this->postJson('/api/contact', []);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['name', 'email', 'subject', 'message']);
-        Mail::assertNothingSent();
+        Http::assertNothingSent();
     }
 
     public function test_contact_message_rejects_a_filled_honeypot_field(): void
     {
-        Mail::fake();
+        Http::fake();
 
         $response = $this->postJson('/api/contact', [
             'name' => 'Robot',
@@ -51,6 +51,6 @@ class ContactControllerTest extends TestCase
         ]);
 
         $response->assertStatus(422);
-        Mail::assertNothingSent();
+        Http::assertNothingSent();
     }
 }
