@@ -66,7 +66,7 @@ return [
         // séparé de MAIL_FROM_ADDRESS (l'expéditeur technique, souvent une
         // adresse sur un domaine vérifié chez le fournisseur d'envoi) car ce
         // n'est pas forcément la même adresse.
-        'address' => env('CONTACT_EMAIL', 'biblio@iu-ztf.cm'),
+        'address' => env('CONTACT_EMAIL', 'contact@sckolaris.com'),
     ],
 
     'frontend' => [
