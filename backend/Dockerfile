@@ -27,8 +27,16 @@ RUN install-php-extensions \
 # (read.csv/write.csv/lm/...), justement pour ne dépendre d'aucune
 # installation de paquet CRAN au moment du build.
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends r-base \
+	&& apt-get install -y --no-install-recommends r-base libcap2-bin \
 	&& rm -rf /var/lib/apt/lists/*
+
+# L'image de base donne à frankenphp la capability cap_net_bind_service
+# (pour écouter sur le port 80/443 sans root) — le runtime sandboxé de
+# Render refuse d'exec() un binaire portant cette capability ("Operation
+# not permitted", avant même le démarrage de frankenphp). On la retire :
+# le Caddyfile écoute déjà sur $PORT (non privilégié sur Render), elle ne
+# sert à rien ici.
+RUN setcap -r /usr/local/bin/frankenphp
 
 # Composer n'est pas inclus dans l'image de base — copié depuis l'image
 # officielle Composer (pattern standard, aucune installation réseau custom).
